@@ -20,14 +20,24 @@ module IEV
       # @param code [String] reference
       # @return [RelatonIso::IsoBibliongraphicItem]
       def fetch(code)
+        relaton_item = fetch!(code)
+
+        if relaton_item.nil?
+          debug(:relaton, "Could not fetch authorative source '#{code}'.")
+        end
+
+        relaton_item
+      end
+
+      private
+
+      def fetch!(code)
         retrying_on_failures do
           capture_output_streams do
             @db.fetch code
           end
         end
       end
-
-      private
 
       def retrying_on_failures(attempts: 4)
         curr_attempt = 1
