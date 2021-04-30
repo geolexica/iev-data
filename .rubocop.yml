@@ -36,6 +36,9 @@ Lint/AmbiguousBlockAssociation:
 Metrics:
   Enabled: false
 
+Metrics/MethodLength:
+  Enabled: false
+
 # Obviously this is not a Rails application.
 Rails:
   Enabled: false
